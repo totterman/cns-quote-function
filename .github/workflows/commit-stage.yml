@@ -45,16 +45,19 @@ jobs:
       contents: read
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up GraalVM
         uses: graalvm/setup-graalvm@v1
         with:
-          version: '22.1.0'
           java-version: '17'
+          distribution: 'graalvm'
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build, unit tests and integration tests (native)
         run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          echo "JAVA_PATH: $JAVA_PATH"
           chmod +x gradlew
           ./gradlew nativeCompile
   package:
