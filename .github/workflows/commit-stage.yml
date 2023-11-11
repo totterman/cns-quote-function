@@ -53,10 +53,10 @@ jobs:
           java-version: '17'
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build. unit tests and integration tests (native)
+      - name: Build, unit tests and integration tests (native)
         run: |
           chmod +x gradlew
-          ./gradlew nativeBuild
+          ./gradlew nativeCompile
   package:
     name: Package and Publish
     if: ${{ github.ref == 'refs/heads/main' }}
